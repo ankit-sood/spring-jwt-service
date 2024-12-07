@@ -1,31 +1,120 @@
-# Getting Started
+# Project Name
 
-### Reference Documentation
-For further reference, please consider the following sections:
+## Table of Contents
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/3.4.0/maven-plugin)
-* [Create an OCI image](https://docs.spring.io/spring-boot/3.4.0/maven-plugin/build-image.html)
-* [Spring Web](https://docs.spring.io/spring-boot/3.4.0/reference/web/servlet.html)
-* [Spring Security](https://docs.spring.io/spring-boot/3.4.0/reference/web/spring-security.html)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/3.4.0/reference/data/sql.html#data.sql.jpa-and-spring-data)
+- [Introduction](#introduction)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [API Endpoints](#api-endpoints)
+- [Configuration](#configuration)
+- [Testing](#testing)
+- [Monitoring & Observability](#monitoring&observability)
 
-### Guides
-The following guides illustrate how to use some features concretely:
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
-* [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
-* [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
-* [Authenticating a User with LDAP](https://spring.io/guides/gs/authenticating-ldap/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
 
-### Maven Parent overrides
+## Introduction
 
-Due to Maven's design, elements are inherited from the parent POM to the project POM.
-While most of the inheritance is fine, it also inherits unwanted elements like `<license>` and `<developers>` from the parent.
-To prevent this, the project POM contains empty overrides for these elements.
-If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
+Provide a brief description of the project, its purpose, and the technologies used.
 
+## Features
+
+List the main features of the API.
+
+- Feature 1
+- Feature 2
+- Feature 3
+
+## Prerequisites
+
+List the software and tools that need to be installed before setting up the project.
+
+- Java JDK 17 or higher
+- Maven
+- Spring Boot
+
+## Installation
+
+Step-by-step instructions on how to set up the project locally.
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/your-repo-name.git
+
+# Navigate to the project directory
+cd your-repo-name
+
+# Install dependencies
+mvn clean install
+```
+
+## Running the Application
+- Instructions on how to run the application.
+- 
+
+## Run the application
+mvn spring-boot:run
+
+## API Endpoints
+Document the API endpoints with descriptions, request types, and sample responses. Only document frequently used APIs, for rest of the APIS we can use Swagger.
+
+### - Get list of examples
+#### Request
+```
+GET /api/example 
+Content-Type: application/json
+```
+#### Response
+```
+[
+  {
+    "id": 1,
+    "name": "Example"
+  }
+]
+```
+
+### - Create an example
+#### Request
+```
+POST /api/example
+Content-Type: application/json
+{
+  "name": "New Example"
+}
+```
+#### Response
+```
+{
+  "id": 2,
+  "name": "New Example"
+}
+```
+#### Validations
+
+| Field Name   | Validation Name | Description                                               |
+|--------------|-----------------|-----------------------------------------------------------|
+| ID           |    NotNull      | Details of the check performed as part of the validations |             
+| Content Cell |   Content Cell  |  Content Cell                                             |
+
+## Configuration
+Explain how to configure the application, such as setting environment variables or modifying configuration files.
+(Optional and should be added along with some other development task)
+
+# Testing
+Instructions on how to run the tests for the application. (Mention all the types of testing configured. Include the links to astra as well)
+
+## Run tests
+mvn test
+
+# Monitoring & Observability
+## Splunk Dashboards
+- [Name of Dashboard](Link to the URL)
+
+## Prometheus Dashboard
+- [SCUS](Link to the URL)
+- [EUS](Link to the URL)
+
+## Grafana Dashboards
+- [Name of Dashboard](Link to the URL)
