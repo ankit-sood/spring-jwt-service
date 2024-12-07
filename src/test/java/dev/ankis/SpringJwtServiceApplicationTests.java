@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -76,6 +77,27 @@ class SpringJwtServiceApplicationTests {
 	}
 
 	@Order(3)
+	@Test
+	@DisplayName("When user provides incorrect username & password then user should not be logged into the system.")
+	void testLoginWithIncorrectCredentials() throws Exception {
+		LoginUserRequest registeredUser = LoginUserRequest.builder()
+				.email("foo@bar.com")
+				.password("foo")
+				.build();
+
+
+		String response = mockMvc
+				.perform(post("/auth/login").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(registeredUser)))
+				.andExpect(status().is4xxClientError())
+				.andReturn()
+				.getResponse()
+				.getContentAsString();
+
+		ProblemDetail problemDetail = mapper.readValue(response, ProblemDetail.class);
+		assertThat(problemDetail.getDetail(), equalTo("Bad credentials"));
+	}
+
+	@Order(4)
 	@Test
 	@DisplayName("When users endpoint is called without any parameter then all the users in db should be returned.")
 	void getAllUsers() throws Exception {
