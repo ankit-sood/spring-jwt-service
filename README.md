@@ -11,6 +11,13 @@
 docker run -d -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=taskdb --name mysqldb -p 3307:3306 mysql:8.0
 ```
 
+### Redis Docker Commands
+```
+docker pull redis
+docker run --name redisdb -p 6379:6379 -d redis
+```
+
+### Possible Exceptions Related to Authentication
 |Authentication Error|Exception thrown|HTTP Status code|
 |--------------------|----------------|----------------|
 |Bad login credentials|BadCredentialsException|401|

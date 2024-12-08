@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.ankis.entities.User;
 import dev.ankis.repositories.UserRepository;
+import dev.ankis.repositories.CacheDataRepository;
 import dev.ankis.requests.LoginUserRequest;
 import dev.ankis.requests.RegisterUserRequest;
 import dev.ankis.responses.LoginResponse;
@@ -38,6 +39,9 @@ class SpringJwtServiceApplicationTests {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private CacheDataRepository cacheDataRepository;
 
 	@Order(1)
 	@Test

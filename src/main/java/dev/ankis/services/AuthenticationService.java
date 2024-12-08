@@ -7,6 +7,7 @@ import dev.ankis.requests.RegisterUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final CacheDataService cacheDataService;
 
     public User signup(RegisterUserRequest inputRequest){
         User user = new User()
@@ -33,7 +35,6 @@ public class AuthenticationService {
                         inputRequest.getPassword()
                 )
         );
-
         return userRepository.findByEmail(inputRequest.getEmail()).orElseThrow();
     }
 }

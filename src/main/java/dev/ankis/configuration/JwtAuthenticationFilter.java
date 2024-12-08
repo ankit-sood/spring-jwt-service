@@ -1,6 +1,7 @@
 package dev.ankis.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.ankis.services.CacheDataService;
 import dev.ankis.services.JWTService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -27,6 +28,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JWTService jwtService;
     private final UserDetailsService userDetailsService;
+    private final CacheDataService cacheDataService;
     private final HandlerExceptionResolver handlerExceptionResolver;
     private final ObjectMapper mapper;
 
@@ -44,7 +46,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try{
             final String jwt = authHeader.substring(7);
             final String userEmail = jwtService.extractUsername(jwt);
-
+//            String serverJwt = cacheDataService.getData("token-"+userEmail, String.class);
+//            if(serverJwt!=null){
+//                final String email = jwtService.extractUsername(serverJwt);
+//                if(email.equalsIgnoreCase(userEmail) && !jwtService.isTokenExpired(userJwt)){
+//                    filterChain.doFilter(request, response);
+//                    return;
+//                } else {
+//                    throw new IllegalStateException("Invalid token");
+//                }
+//            }
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
             if(userEmail!=null && authentication==null){
