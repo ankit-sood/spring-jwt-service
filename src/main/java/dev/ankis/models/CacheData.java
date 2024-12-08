@@ -10,7 +10,7 @@ import org.springframework.data.redis.core.index.Indexed;
 @RequiredArgsConstructor
 @Getter
 @Accessors(chain = true)
-@RedisHash("cacheData")
+@RedisHash(value = "cacheData", timeToLive = 3600l)
 public class CacheData {
     @Id
     private final String key;

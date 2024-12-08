@@ -53,7 +53,6 @@ class SpringJwtServiceApplicationTests {
 				.password("foobar")
 				.build();
 
-
 		String response = mockMvc
 				.perform(post("/auth/sign-up").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(newUser)))
 				.andExpect(status().isCreated())
@@ -137,6 +136,28 @@ class SpringJwtServiceApplicationTests {
 				.getContentAsString();
 
 		return mapper.readValue(response, LoginResponse.class);
+	}
+
+	@Order(5)
+	@Test
+	@DisplayName("When an invalid request to register user comes, the user should not be registered in the system.")
+	void registerUser_InvalidRequest() throws Exception {
+
+		RegisterUserRequest newUser = RegisterUserRequest.builder()
+				.fullName("Foo Bar")
+				.password("foobar")
+				.build();
+
+		String response = mockMvc
+				.perform(post("/auth/sign-up").contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(newUser)))
+				.andExpect(status().is4xxClientError())
+				.andReturn()
+				.getResponse()
+				.getContentAsString();
+
+//		final JsonNode node = mapper.readTree(response);
+//
+//		assertThat(node.get("errors")., equalTo("The email is mandatory."));
 	}
 
 }

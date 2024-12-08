@@ -7,6 +7,7 @@ import dev.ankis.responses.LoginResponse;
 import dev.ankis.services.AuthenticationService;
 import dev.ankis.services.CacheDataService;
 import dev.ankis.services.JWTService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +29,14 @@ public class AuthController {
 
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
-    public User registerUser(@RequestBody RegisterUserRequest inputRequest){
+    public User registerUser(@Valid @RequestBody RegisterUserRequest inputRequest){
         return authenticationService.signup(inputRequest);
     }
 
 
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> register(@RequestBody LoginUserRequest inputRequest){
+    public ResponseEntity<LoginResponse> register(@Valid @RequestBody LoginUserRequest inputRequest){
         User authenticatedUser = authenticationService.authenticate(inputRequest);
         String jwt = jwtService.generateToken(authenticatedUser);
         cacheDataService.saveData("token-"+inputRequest.getEmail(), jwt);
